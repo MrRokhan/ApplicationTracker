@@ -45,9 +45,12 @@ export default function DashboardPage() {
 >
   View Pipeline
 </Link>
-              <button className="rounded-xl bg-black px-4 py-2 text-white hover:opacity-90">
-                Add Job
-              </button>
+              <Link
+  href="/jobs/new"
+  className="rounded-xl bg-black px-4 py-2 text-white hover:opacity-90"
+>
+  Add Job
+</Link>
             </div>
           </div>
 

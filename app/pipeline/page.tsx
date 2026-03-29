@@ -1,4 +1,5 @@
 import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 
 export default function PipelinePage() {
   const jobs = {
@@ -44,9 +45,12 @@ export default function PipelinePage() {
                 </p>
               </div>
 
-              <button className="w-fit rounded-xl bg-black px-5 py-3 text-white transition hover:opacity-90">
-                Add Job
-              </button>
+<Link
+  href="/jobs/new"
+  className="w-fit rounded-xl bg-black px-5 py-3 text-white transition hover:opacity-90"
+>
+  Add Job
+</Link>
             </div>
 
             <div className="grid gap-6 xl:grid-cols-5">
