@@ -15,9 +15,10 @@ export function useJobs() {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
-  }, [jobs]);
+  function saveJobs(updatedJobs: Job[]) {
+    setJobs(updatedJobs);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedJobs));
+  }
 
   function addJob(job: Omit<Job, "id">) {
     const newJob: Job = {
@@ -25,17 +26,20 @@ export function useJobs() {
       ...job,
     };
 
-    setJobs((prev) => [newJob, ...prev]);
+    const updatedJobs = [newJob, ...jobs];
+    saveJobs(updatedJobs);
   }
 
   function updateJobStatus(id: string, status: JobStatus) {
-    setJobs((prev) =>
-      prev.map((job) => (job.id === id ? { ...job, status } : job))
+    const updatedJobs = jobs.map((job) =>
+      job.id === id ? { ...job, status } : job
     );
+    saveJobs(updatedJobs);
   }
 
   function deleteJob(id: string) {
-    setJobs((prev) => prev.filter((job) => job.id !== id));
+    const updatedJobs = jobs.filter((job) => job.id !== id);
+    saveJobs(updatedJobs);
   }
 
   return {
