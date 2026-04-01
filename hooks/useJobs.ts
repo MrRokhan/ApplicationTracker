@@ -30,6 +30,13 @@ export function useJobs() {
     saveJobs(updatedJobs);
   }
 
+  function updateJob(id: string, updatedFields: Partial<Job>) {
+    const updatedJobs = jobs.map((job) =>
+      job.id === id ? { ...job, ...updatedFields } : job
+    );
+    saveJobs(updatedJobs);
+  }
+
   function updateJobStatus(id: string, status: JobStatus) {
     const updatedJobs = jobs.map((job) =>
       job.id === id ? { ...job, status } : job
@@ -42,10 +49,16 @@ export function useJobs() {
     saveJobs(updatedJobs);
   }
 
+  function getJobById(id: string) {
+    return jobs.find((job) => job.id === id);
+  }
+
   return {
     jobs,
     addJob,
+    updateJob,
     updateJobStatus,
     deleteJob,
+    getJobById,
   };
 }
